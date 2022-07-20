@@ -17,6 +17,11 @@ Crear un método `repeatify` que este disponible para _todos_ los objetos `Strin
 
 ```javascript
 console.log('hola'.repeatify(3));   //holaholahola
+
+
+
+
+
 ```
 
 ### Shapes
