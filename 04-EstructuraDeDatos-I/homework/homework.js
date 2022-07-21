@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /*
 Definir las funciones recursivas nFactorial y nFibonacci.
@@ -15,9 +15,30 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+  if (n === 0) return 1;
+  return n * nFactorial(n - 1);
 }
 
+function iterativaFactorial(n) {
+  let acumuladorFactorial = 1;
+  for (let i = n; i > 0; i--) {
+    acumuladorFactorial *= i;
+    console.log(i);
+  }
+  return acumuladorFactorial;
+}
+
+function iterativaFibonacci(n) {
+  let arrayFibonacci = [0,1];
+    for(let i = 2; i <= n; i++ ){
+    arrayFibonacci[i] =  arrayFibonacci[i - 2 ] + arrayFibonacci[i - 1];
+    }
+    return arrayFibonacci[n];
+  }
+
 function nFibonacci(n) {
+  if (n < 2) return n;
+  return nFibonacci(n - 2) + nFibonacci(n - 1);
 }
 
 /*
@@ -28,10 +49,53 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 
 Pueden utilizar class o función constructora.
 */
-
-function Queue() {
-
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
 }
+class Queue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.length = 0;
+  }
+  size() {
+    return this.length;
+  }
+  enqueue(value) {
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      this.last.next = newNode;
+      this.last = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  dequeue() {
+    // elimina el primer elemento y lo retorna ;
+    if (this.length !== 0) {
+      const returnFist = this.first.value; // 5
+      const newFirst = this.first.next;
+      this.first = newFirst; // 4
+      this.length--;
+      return returnFist;
+    } else {
+      return undefined;
+    }
+  }
+}
+
+const cola = new Queue();
+cola.enqueue(3);
+cola.enqueue(4);
+cola.enqueue(5);
+console.log(cola.dequeue());
+console.log(cola);
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
@@ -39,5 +103,5 @@ function Queue() {
 module.exports = {
   Queue,
   nFactorial,
-  nFibonacci
+  nFibonacci,
 };
