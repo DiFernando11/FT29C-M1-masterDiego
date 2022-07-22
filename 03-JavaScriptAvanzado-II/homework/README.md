@@ -62,3 +62,4 @@ Probá tu solución con el siguiente código:
 
 * Creá una última `shape` llamada `Square`.
 * Agregá el método `getArea` de todas las `shape`s.
+
