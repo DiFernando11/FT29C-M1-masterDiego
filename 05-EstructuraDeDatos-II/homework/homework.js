@@ -32,12 +32,19 @@ class LinkedList {
   // addInPosition(){}
   add(value) {
     const newNode = new Node(value);
-    if (this.length === 0) {
+    if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
     } else {
+      //tail
       this.tail.next = newNode;
       this.tail = newNode;
+      //sin tail
+      //let currentNode = this.head;
+      // while(currentNode.next){
+      // currentNode = currentNode.next;
+      //}
+      //currentNode = newNode;
     }
     this.length++;
     return this;
@@ -45,10 +52,24 @@ class LinkedList {
   remove() {
     // vamos a eliminar el ultimo elemento de la lista
     const currentValue = this.tail.value;
-    if (this.length === 0) {
+    if (!this.head) {
       return null;
     }
-    if (this.length === 1) {
+    // sin tail y sin getTheIndex
+
+    //if(this.head.next === null){
+    // let currentNodeHead = this.head;
+    // this.head = null;
+    //return currentNodeHead.value;
+    //}else{
+    // while(currentNodeHead.next.next){
+    //currentNodeHead = currentNodeHead.next
+    //}
+    //let returnValue = current.next.value;
+    //currentNodeHead = null
+    //return returnValue;
+    //}
+    if (this.head.next === null) {
       this.head = null;
       this.length--;
       return currentValue;
@@ -76,6 +97,13 @@ class LinkedList {
         : currentNode.value === value;
     };
 
+    //let current = this.head;
+    // while(current.next){
+    // if(current.value === value){
+    //  return current.value
+    //} else { current = current.next}
+    //}
+
     let counter = 0;
     let currentNode = this.head;
     do {
@@ -90,7 +118,9 @@ class LinkedList {
   addAnywhere(value, index) {
     const newNode = new Node(value);
     if (index > this.length) {
-      return `No se encuentra la posicion en linkedList: posiciones ${this.length + 1}`;
+      return `No se encuentra la posicion en linkedList: posiciones ${
+        this.length + 1
+      }`;
     }
     if (index === 0) {
       let currentNodeHead = this.head;
@@ -141,13 +171,14 @@ class HashTable {
   hash(key) {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
-      hash = (hash + key.charCodeAt(i)) % this.numBucketsArray.length;
+      hash = (hash + key.charCodeAt(i)) % this.numBuckets;
     }
     return hash;
   }
   set(key, value) {
     if (typeof key === "string") {
       const address = this.hash(key);
+
       if (!this.numBucketsArray[address]) {
         this.numBucketsArray[address] = [];
       }
@@ -178,15 +209,18 @@ class HashTable {
     return undefined;
   }
   hasKey(key) {
-    let valorBoolean = false;
-    const address = this.hash(key);
-    const currentBucket = this.numBucketsArray[address];
-    for (let i = 0; i < currentBucket.length; i++) {
-      if (currentBucket[i][0] === key) {
-        valorBoolean = true;
-      }
-    }
-    return valorBoolean;
+    let respuesta = this.get(key);
+    return respuesta ?  true : false;
+  
+    //     let valorBoolean = false;
+    //   const address = this.hash(key);
+    //   const currentBucket = this.numBucketsArray[address];
+    //   for (let i = 0; i < currentBucket.length; i++) {
+    //     if (currentBucket[i][0] === key) {
+    //       valorBoolean = true;
+    //     }
+    //   }
+    //   return valorBoolean;
   }
 }
 

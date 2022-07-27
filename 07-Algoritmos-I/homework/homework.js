@@ -36,6 +36,20 @@ function bubbleSort(array) {
   }
   //console.log(array); // Mostramos, por consola, la lista ya ordenada
   return array;
+  // let hayCambio = true;
+  // while(hayCambio){
+  //hayCambio = false;
+  // for (let i = 0; i < array.length; i++){
+  //if(array[i] > array[i+1]){
+  // let aux = array[i];
+  // array[i] = array[i+1];
+  // array[i+1] = aux;
+  //hayCambio = true;
+  // }
+  // )
+  //}
+  //return hayCambio
+  //}
 }
 
 function insertionSort(array) {
@@ -63,11 +77,16 @@ function selectionSort(array) {
   // Tu código:
   for (let j = 0; j < array.length; ++j) {
     let iMin = j;
-    let i = j;
-    for (++i; i < array.length; ++i) {
-      array[i] < array[iMin] && (iMin = i);
+    for (let i = j + 1; i < array.length; ++i) {
+      if (array[i] < array[iMin]) {
+        iMin = i;
+      }
     }
-    [array[j], array[iMin]] = [array[iMin], array[j]];
+    if (iMin !== j) {
+      let aux = array[j];
+      array[j] = array[iMin];
+      array[iMin] = aux;
+    }
   }
 
   return array;
